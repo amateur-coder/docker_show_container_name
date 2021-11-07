@@ -1,0 +1,14 @@
+version: '2.3'
+services:
+    node:
+      image: "node"
+      build:
+        context: ./
+        dockerfile: Dockerfile
+      environment:
+        - DOCKER_HOST=unix:///run/docker.sock
+      volumes:
+        - ./:/root:z
+        - /run/docker.sock:/run/docker.sock:ro
+      entrypoint: /bin/sh
+      command: /root/get_name.sh
